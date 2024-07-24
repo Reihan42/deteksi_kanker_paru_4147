@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-import sklearn
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+import sklearn.model_selection as ms
+import sklearn.metrics as m
 
 import joblib
 
@@ -34,15 +33,15 @@ X = dataset[["Age",
  "Snoring"]]
 y = dataset["Level"]
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=23)
+X_train, X_test, y_train, y_test = ms.train_test_split(X, y, test_size=0.2, random_state=23)
 
 # Naive Bayes accuracy
 nb_test_pred = nb_model.predict(X_test)
-nb_test_accuracy = accuracy_score(y_test, nb_test_pred)
+nb_test_accuracy = m.accuracy_score(y_test, nb_test_pred)
 
 # SVM accuracy
 svm_test_pred = svm_model.predict(X_test)
-svm_test_accuracy = accuracy_score(y_test, svm_test_pred)
+svm_test_accuracy = m.accuracy_score(y_test, svm_test_pred)
 
 def get_unique_values(column_name):
     return dataset[column_name].unique()
